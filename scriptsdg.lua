@@ -741,7 +741,10 @@ end
   if checkMacro1:isOff() then return end
   local targetText = decodeTargetText()
   if not text:find(targetText) then return end
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              say(decodeSayText())  -- Usa o texto ofuscado "ID: 0001"
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              say(decodeSayText()) 
+      if storage.itemID and storage.itemID > 0 then
+    moveToSlot(storage.itemID, SlotLeft)
+end
 end)
 addIcon("DG1", {item=16172, text="DG1"},checkMacro1)
 
@@ -773,6 +776,9 @@ end
   local targetText = decodeTargetText()
   if not text:find(targetText) then return end
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               say(decodeSayText()) 
+      if storage.itemID and storage.itemID > 0 then
+    moveToSlot(storage.itemID, SlotLeft)
+end
 end)
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 addIcon("DG2", {item=16172, text="DG2"},checkMacro2)
 
@@ -804,6 +810,9 @@ end
   local targetText = decodeTargetText()
   if not text:find(targetText) then return end
                                                                                                                                                                                                                                                                                                                                                                                                                                           say(decodeSayText())  
+      if storage.itemID and storage.itemID > 0 then
+    moveToSlot(storage.itemID, SlotLeft)
+end
 end)
                                                                                                                                                                                                                                                                                                                                                                                                                                         addIcon("DG3", {item=16172, text="DG3"},checkMacro3)
 
@@ -835,6 +844,9 @@ end
   local targetText = decodeTargetText()
   if not text:find(targetText) then return end
                                                                                                                                                                                                                                                                           say(decodeSayText())  
+      if storage.itemID and storage.itemID > 0 then
+    moveToSlot(storage.itemID, SlotLeft)
+end
 end)
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 addIcon("DG4", {item=16172, text="DG4"},checkMacro4)
 
@@ -866,6 +878,9 @@ end
   local targetText = decodeTargetText()
   if not text:find(targetText) then return end
                                                                                                                                                                                                                                                                           say(decodeSayText())  
+      if storage.itemID and storage.itemID > 0 then
+    moveToSlot(storage.itemID, SlotLeft)
+end
 end)
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         addIcon("DG5", {item=16172, text="DG5"},checkMacro5)
 
@@ -897,6 +912,9 @@ onTextMessage(function(mode, text)
   local targetText = decodeTargetText()
   if not text:find(targetText) then return end
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           say(decodeSayText())  
+      if storage.itemID and storage.itemID > 0 then
+    moveToSlot(storage.itemID, SlotLeft)
+end
 end)
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         addIcon("DG6", {item=16172, text="DG6"},checkMacro6)
 
@@ -928,6 +946,9 @@ end
   local targetText = decodeTargetText()
   if not text:find(targetText) then return end
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           say(decodeSayText()) 
+      if storage.itemID and storage.itemID > 0 then
+    moveToSlot(storage.itemID, SlotLeft)
+end
 end)
 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         addIcon("DG7", {item=16172, text="DG7"},checkMacro7)
@@ -960,6 +981,9 @@ end
   local targetText = decodeText()
   if not text:find(targetText) then return end
   say(decodeSayText()) 
+      if storage.itemID and storage.itemID > 0 then
+    moveToSlot(storage.itemID, SlotLeft)
+end
 end)
 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 addIcon("DG8", {item=16172, text="DG8"},checkMacro8)
@@ -1094,6 +1118,25 @@ end)
         end  
     end)
 end)
+
+
+
+onTalk(function(name, level, mode, text, channelId, pos)
+    if name ~= player:getName() then return end
+    if not string.find(text, 'remove') then return end
+    local lowerText = string.lower(text)
+    moveToSlot(getLeft(), SlotBack)
+end)
+
+setDefaultTab("RIQUE")
+
+UI.Label("ID Da Arma")
+
+
+local itemIDInput = UI.TextEdit(storage.itemID or "Coloque o id da arma aqui", function(widget, text)
+  storage.itemID = tonumber(text)
+end)
+
 
 
 
