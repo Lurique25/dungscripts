@@ -1994,5 +1994,8 @@ end)
 
 
 
-
+   onTextMessage(function(mode, text)
+        if not text:lower():find('ocupada') then return; end
+       say("A Dungeon está ocupada, aguardando...")
+    end)
 
